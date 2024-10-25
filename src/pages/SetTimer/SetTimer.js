@@ -135,7 +135,7 @@ const SetTimer = ({ isMenuOpen, setIsMenuOpen }) => {
             <div className="duration-display">{duration}</div>
             <button className="duration-button" onClick={increaseDuration}>›</button>
           </div>
-          <div className="duration-label">minuter</div>
+          <div className="duration-label">minutes</div>
 
           {/* Checkboxar för intervall och paus */}
           <div className="checkbox-container">
@@ -150,7 +150,7 @@ const SetTimer = ({ isMenuOpen, setIsMenuOpen }) => {
                   }
                 }} 
               />
-              Intervall
+              Intervals
             </label>
 
             <label className={isIntervalMode ? "checkbox-visible" : "checkbox-hidden"}>
@@ -159,11 +159,11 @@ const SetTimer = ({ isMenuOpen, setIsMenuOpen }) => {
                 checked={isPauseMode} 
                 onChange={() => setIsPauseMode(!isPauseMode)} 
               />
-              5 min paus / Intervall
+              5 min break / Interval
             </label>
           </div>
 
-          <button className="start-button" onClick={handleStart}>Starta Timer</button>
+          <button className="start-button" onClick={handleStart}>Start Timer</button>
           <Menu onViewChange={handleMenuChange} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         </div>
       )}
