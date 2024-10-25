@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaPause } from 'react-icons/fa'; 
+import { FaPause } from 'react-icons/fa';
+import { motion } from 'framer-motion'; // Importera motion
 import './IntervalView.css';
 
 const IntervalView = ({ onContinue, onAbort, isBreak, secondsRemaining }) => {
@@ -12,7 +13,13 @@ const IntervalView = ({ onContinue, onAbort, isBreak, secondsRemaining }) => {
       <div className="interval-content">
         {isBreak ? (
           <div>
-            <FaPause style={{ fontSize: '80px', color: 'white', marginBottom: '20px' }} /> {/* Vit pausikon */}
+            <motion.div
+              className="pause-icon"
+              animate={{ rotate: [0, 5, -5, 0] }} // Definiera skakningsanimation
+              transition={{ duration: 0.5, repeat: Infinity }} // Animationens längd och upprepning
+            >
+              <FaPause style={{ fontSize: '80px', color: 'white', marginBottom: '20px' }} />
+            </motion.div>
             <h2 className="alarm-text">Pause & breath</h2>
             <div className="countdown">
               <h2>{minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h2>
