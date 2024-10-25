@@ -1,0 +1,59 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #ffffff; 
+    color: rgb(0, 0, 0); 
+    position: relative;
+}
+
+.header-logo {
+    position: absolute;
+    left: 20px; 
+    width: 30px; 
+    transition: filter 0.3s; 
+}
+
+/* Gör logotypen vit när menyn är öppen */
+.header-logo.white {
+    filter: brightness(0) invert(1); 
+}
+
+.header-title {
+    font-size: 24px;
+    text-transform: uppercase; 
+    margin-top: 10px;
+}
+
+/* Responsiv design med media queries */
+
+/* För skärmar mindre än 768px (mobiler och små surfplattor) */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px; 
+    }
+
+    .header-logo {
+        width: 30px; 
+    }
+
+    .header-title {
+        font-size: 20px; 
+    }
+}
+
+/* För skärmar mindre än 480px (mycket små mobiler) */
+@media (max-width: 480px) {
+    .header {
+        padding: 10px; 
+    }
+
+    .header-logo {
+        width: 30px; 
+    }
+
+    .header-title {
+        font-size: 18px; 
+    }
+}

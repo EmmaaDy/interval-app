@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+
+html, body {
+  height: 100%; 
+  overflow: hidden; 
+}
+
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  background-color: #000000; 
+  cursor: pointer; 
+  padding: 0; 
+}
+
+.loading-screen img {
+  width: 15vw; 
+  max-width: 40px; 
+  max-height: 10vh; 
+  margin-bottom: 10px; 
+}
+
+.loading-screen h2 {
+  font-size: 24px; 
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 5px; 
+}
+
+.loading-screen h3 {
+  font-size: 20px; 
+  color: white;
+  margin-top: 0;
+  font-weight: 300; 
+}
+
+/* Responsiv design med media queries */
+
+/* För skärmar mindre än 768px (mobiler och små surfplattor) */
+@media (max-width: 768px) {
+  .loading-screen img {
+    max-height: 8vh; 
+  }
+  
+  .loading-screen h2 {
+    font-size: 20px; 
+  }
+
+  .loading-screen h3 {
+    font-size: 18px; 
+  }
+}
+
+/* För skärmar mindre än 480px (mycket små mobiler) */
+@media (max-width: 480px) {
+  .loading-screen img {
+    max-height: 6vh; 
+  }
+
+  .loading-screen h2 {
+    font-size: 18px; 
+  }
+
+  .loading-screen h3 {
+    font-size: 16px; 
+  }
+}

@@ -1,0 +1,48 @@
+.menu-container {
+  position: relative;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 1);
+  z-index: 1000;
+}
+
+.menu-dropdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1001;
+}
+
+.menu-dropdown ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu-dropdown li {
+  margin: 10px 0;
+  cursor: pointer;
+  color: white;
+  text-transform: uppercase; 
+}
+
+.menu-dropdown li:hover {
+  text-decoration: underline;
+}
+
+.header-logo {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 30px;
+  transition: filter 0.3s;
+}

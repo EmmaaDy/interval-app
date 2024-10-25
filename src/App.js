@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
+import LoadingScreen from './pages/LoadingScreen/LoadingScreen'; 
+import SetTimer from './pages/SetTimer/SetTimer'; 
+import Header from './components/Header/Header'; 
+import './index.css'; 
 
-function App() {
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleStart = () => {
+    localStorage.setItem('isLoaded', 'true'); 
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen); 
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className={`app ${isMenuOpen ? 'menu-open' : ''}`}>
+        <Routes>
+          <Route path="/" element={<LoadingScreen onStart={handleStart} />} />
+          <Route 
+            path="/timer" 
+            element={
+              <>
+                <Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
+                <SetTimer isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+              </>
+            } 
+          />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
