@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion'; // Importera motion
+import { motion } from 'framer-motion'; 
 import Menu from '../../components/Menu/Menu';
 import './AnalogTimer.css';
 

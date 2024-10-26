@@ -4,14 +4,14 @@ import { motion } from 'framer-motion';
 import './AlarmView.css';
 
 const AlarmView = ({ onResetAndGoBack }) => {
-  // Define animations for the button
+  // Definiera animationer för knappen
   const buttonVariants = {
     initial: { scale: 1 },
     animate: {
-      scale: [1, 1.05, 1], // Pulsating effect
+      scale: [1, 1.05, 1], // Pulserande effekt
       transition: {
         duration: 1,
-        repeat: Infinity, // Repeat indefinitely
+        repeat: Infinity, // Upprepa oändligt
         ease: "easeInOut",
       },
     },
@@ -22,8 +22,8 @@ const AlarmView = ({ onResetAndGoBack }) => {
       <div className="alarm-container">
         <motion.div
           className="alarm-icon"
-          animate={{ rotate: [0, 5, -5, 0] }} // Define shaking animation
-          transition={{ duration: 0.5, repeat: Infinity }} // Animation duration and repetition
+          animate={{ rotate: [0, 5, -5, 0] }} // Definiera skakningsanimation
+          transition={{ duration: 0.5, repeat: Infinity }} // Animationens längd och upprepning
         >
           <div className="ring-indicator left"></div>
           <FaBell style={{ color: 'gray', fontSize: '100px' }} />
@@ -33,9 +33,9 @@ const AlarmView = ({ onResetAndGoBack }) => {
         <motion.button 
           className="common-button" 
           onClick={onResetAndGoBack}
-          variants={buttonVariants} // Use defined animation variants
-          initial="initial" // Start with initial variant
-          animate="animate" // Animate to defined variant
+          variants={buttonVariants} // Använd definierade animationsvarianter
+          initial="initial" // Börja med initial variant
+          animate="animate" // Använd definierad animation
         >
           Set New Timer
         </motion.button>

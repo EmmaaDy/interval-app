@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 80px; /* Bevara detta värde om det behövs */
+  margin-top: 80px; 
 }
 
 .time-display {
@@ -22,7 +22,7 @@
   transition: background-color 0.3s; 
   outline: none; 
 
-  margin-top: 60%; /* Öka avståndet för knappen */
+  margin-top: 60%; 
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 

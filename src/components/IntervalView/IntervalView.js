@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaPause } from 'react-icons/fa';
-import { motion } from 'framer-motion'; // Importera motion
+import { motion } from 'framer-motion'; 
 import './IntervalView.css';
 
 const IntervalView = ({ onContinue, onAbort, isBreak, secondsRemaining }) => {
@@ -8,14 +8,14 @@ const IntervalView = ({ onContinue, onAbort, isBreak, secondsRemaining }) => {
   const minutes = Math.floor(secondsRemaining / 60);
   const seconds = secondsRemaining % 60;
 
-  // Define animations for the button
+  // Definiera animationer för knappen
   const buttonVariants = {
     initial: { scale: 1 },
     animate: {
-      scale: [1, 1.05, 1], // Pulsating effect
+      scale: [1, 1.05, 1], // Pulserande effekt
       transition: {
         duration: 1,
-        repeat: Infinity, // Repeat indefinitely
+        repeat: Infinity, // Upprepa oändligt
         ease: "easeInOut",
       },
     },
@@ -28,8 +28,8 @@ const IntervalView = ({ onContinue, onAbort, isBreak, secondsRemaining }) => {
           <div>
             <motion.div
               className="pause-icon"
-              animate={{ rotate: [0, 5, -5, 0] }} // Define shaking animation
-              transition={{ duration: 0.5, repeat: Infinity }} // Animation duration and repetition
+              animate={{ rotate: [0, 5, -5, 0] }} // Definiera skakningsanimation
+              transition={{ duration: 0.5, repeat: Infinity }} // Animationens längd och upprepning
             >
               <FaPause style={{ fontSize: '80px', color: 'white', marginBottom: '20px' }} />
             </motion.div>
@@ -40,9 +40,9 @@ const IntervalView = ({ onContinue, onAbort, isBreak, secondsRemaining }) => {
             <motion.button 
               className="common-button" 
               onClick={onContinue}
-              variants={buttonVariants} // Use defined animation variants
-              initial="initial" // Start with initial variant
-              animate="animate" // Animate to defined variant
+              variants={buttonVariants} // Använd definierade animationsvarianter
+              initial="initial" // Börja med initial variant
+              animate="animate" // Använd definierad animation
             >
               No pause, go now!
             </motion.button>
@@ -53,9 +53,9 @@ const IntervalView = ({ onContinue, onAbort, isBreak, secondsRemaining }) => {
             <motion.button 
               className="common-button" 
               onClick={onContinue}
-              variants={buttonVariants} // Use defined animation variants
-              initial="initial" // Start with initial variant
-              animate="animate" // Animate to defined variant
+              variants={buttonVariants} // Använd definierade animationsvarianter
+              initial="initial" // Börja med initial variant
+              animate="animate" // Använd definierad animation
             >
               Continue
             </motion.button>
