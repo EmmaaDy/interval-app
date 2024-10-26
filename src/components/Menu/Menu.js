@@ -5,11 +5,11 @@ import Logo from '../../assets/Logo2.svg';
 
 const Menu = ({ onViewChange, isMenuOpen, setIsMenuOpen }) => {
   const handleMenuClick = (view) => {
-    onViewChange(view); // Byter vy baserat på menyalternativet
-    setIsMenuOpen(false); // Stänger menyn
+    onViewChange(view);
+    setIsMenuOpen(false);
   };
 
-  // Animation configuration
+  // Logo animation configuration
   const logoAnimation = {
     initial: { scale: 1 },
     animate: {
@@ -17,34 +17,51 @@ const Menu = ({ onViewChange, isMenuOpen, setIsMenuOpen }) => {
       transition: {
         duration: 1,
         ease: "easeInOut",
-        repeat: Infinity // Repeat indefinitely
+        repeat: Infinity
       }
     }
   };
 
   return (
-    <div className={`menu-container ${isMenuOpen ? 'open' : ''}`}>
+    <motion.div
+      className={`menu-container ${isMenuOpen ? 'open' : ''}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isMenuOpen ? 1 : 0 }}
+      transition={{ duration: 0.3 }}
+    >
       {isMenuOpen && (
-        <div className="menu-overlay" onClick={() => setIsMenuOpen(false)}>
+        <motion.div 
+          className="menu-overlay" 
+          onClick={() => setIsMenuOpen(false)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
           <motion.img 
             src={Logo} 
             alt="Logo" 
             className={`header-logo ${isMenuOpen ? 'white' : ''}`} 
             onClick={() => setIsMenuOpen(false)} 
             variants={logoAnimation} 
-            initial="initial" // Start the animation from the initial state
-            animate="animate" // Use the animate state for the scaling effect
+            initial="initial"
+            animate="animate"
           />
-          <div className="menu-dropdown" onClick={(e) => e.stopPropagation()}> 
+          <motion.div 
+            className="menu-dropdown"
+            onClick={(e) => e.stopPropagation()} 
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
             <ul>
               <li onClick={() => handleMenuClick('analog')}>Analog Timer</li>
               <li onClick={() => handleMenuClick('digital')}>Digital Timer</li>
               <li onClick={() => handleMenuClick('text')}>Text Timer</li>
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

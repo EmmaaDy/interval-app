@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion'; // Importera motion
 import useTimer from '../../hooks/useTimer'; 
 import DigitalTimer from '../../components/DigitalTimer/DigitalTimer'; 
 import AnalogTimer from '../../components/AnalogTimer/AnalogTimer'; 
@@ -19,37 +20,31 @@ const SetTimer = ({ isMenuOpen, setIsMenuOpen }) => {
   const [pauseDuration] = useState(5 * 60); // 5 minuter (i sekunder) för pauser
   const [pauseSecondsRemaining, setPauseSecondsRemaining] = useState(pauseDuration); // Räknare för kvarvarande paus
 
-  // Startar timern och initierar pausvärden om intervall- och pauslägen är aktiva
   const handleStart = useCallback(() => {
     startTimer(duration, isIntervalMode, isPauseMode); 
     setTimerStarted(true);
     setPauseSecondsRemaining(pauseDuration); // Återställer pausvärdet vid start
   }, [startTimer, duration, isIntervalMode, isPauseMode, pauseDuration]); 
 
-  // Startar om timern efter en paus
   const handleContinue = useCallback(() => {
     setShowIntervalView(false); 
     setPauseSecondsRemaining(pauseDuration); 
     handleStart(); 
   }, [pauseDuration, handleStart]);
 
-  // Hanterar vybyten i menyn
   const handleMenuChange = (view) => {
     setCurrentView(view);
   };
 
-  // Avbryter och återställer timern
   const handleAbort = () => {
     stopTimer();
     setTimerStarted(false);
     setShowIntervalView(false); 
     setPauseSecondsRemaining(pauseDuration); 
-    // Återställer kryssrutor
     setIsIntervalMode(false);
     setIsPauseMode(false);
   };
 
-  // Nollställer och återgår till startläget
   const handleResetAndGoBack = () => {
     resetTimer();
     setTimerStarted(false);
@@ -59,17 +54,14 @@ const SetTimer = ({ isMenuOpen, setIsMenuOpen }) => {
     setIsPauseMode(false);
   };
 
-  // Ökar tidslängden med 1 minut
   const increaseDuration = () => {
     setDuration(prevDuration => prevDuration + 1);
   };
 
-  // Minskar tidslängden med 1 minut (minsta värdet är 1)
   const decreaseDuration = () => {
     setDuration(prevDuration => Math.max(1, prevDuration - 1));
   };
 
-  // Hanterar visning av rätt timerbaserat på valt läge
   const renderCurrentTimer = () => {
     if (isRunning && secondsRemaining <= 0) {
       if (isPauseMode && isIntervalMode) {
@@ -121,7 +113,6 @@ const SetTimer = ({ isMenuOpen, setIsMenuOpen }) => {
     }
   };
 
-  // Hanterar nedräkning av pausvisningen om pausläge är aktivt
   useEffect(() => {
     let interval = null;
     if (showIntervalView && isPauseMode && pauseSecondsRemaining > 0) {
@@ -152,7 +143,7 @@ const SetTimer = ({ isMenuOpen, setIsMenuOpen }) => {
           {/* Kryssrutor för intervall och pauser */}
           <div className="checkbox-container">
             <label>
-              <input 
+              <motion.input 
                 type="checkbox" 
                 checked={isIntervalMode} 
                 onChange={() => {
@@ -161,33 +152,56 @@ const SetTimer = ({ isMenuOpen, setIsMenuOpen }) => {
                     setIsPauseMode(false); // Döljer pausläge när intervall är aktivt
                   }
                 }} 
+                whileTap={{ scale: 1.3 }} // Gör checkboxen större vid klick
+                initial={{ scale: 1 }} // Standardstorlek
+                animate={{ scale: isIntervalMode ? 1.3 : 1 }} // Animera storlek baserat på tillstånd
               />
               Intervals
             </label>
 
-            <label className={isIntervalMode ? "checkbox-visible" : "checkbox-hidden"}>
-              <input 
+            {/* Använd motion.div för att animera den andra checkboxen */}
+            <motion.label 
+              initial={{ x: -100, opacity: 0 }} // Startposition
+              animate={isIntervalMode ? { x: 0, opacity: 1 } : {}} // Animation när den andra checkboxen blir synlig
+              transition={{ type: "spring", stiffness: 300 }} // Animeringsinställningar
+              className={isIntervalMode ? "checkbox-visible" : "checkbox-hidden"}
+            >
+              <motion.input 
                 type="checkbox" 
                 checked={isPauseMode} 
                 onChange={() => setIsPauseMode(!isPauseMode)} 
+                whileTap={{ scale: 1.3 }} // Gör checkboxen större vid klick
+                initial={{ scale: 1 }} // Standardstorlek
+                animate={{ scale: isPauseMode ? 1.3 : 1 }} // Animera storlek baserat på tillstånd
               />
               5 min break / Interval
-            </label>
+            </motion.label>
           </div>
 
-          <button className="start-button" onClick={handleStart}>Start Timer</button>
+          {/* Pulserande startknapp */}
+          <motion.button 
+            className="start-button" 
+            onClick={handleStart}
+            whileHover={{ scale: 1.1 }} // Liten förstoring vid hover
+            whileTap={{ scale: 0.9 }} // Liten minskning vid tryck
+            animate={{ 
+              scale: [1, 1.1, 1], // Pulserande effekt
+              transition: { duration: 0.5, repeat: Infinity, repeatType: "reverse" }
+            }}
+          >
+            Start Timer
+          </motion.button>
           <Menu onViewChange={handleMenuChange} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         </div>
       )}
       {timerStarted && renderCurrentTimer()}
 
-      {/* Visar IntervalView om pausläge är aktivt */}
       {showIntervalView && (
         <IntervalView 
           onContinue={handleContinue} 
           onAbort={handleAbort} 
           isBreak={isPauseMode} 
-          secondsRemaining={pauseSecondsRemaining} // Skickar nedräkningen
+          secondsRemaining={pauseSecondsRemaining}
         />
       )}
     </div>
