@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { motion } from 'framer-motion'; // Importera motion
 import Menu from '../../components/Menu/Menu';
 import './TextTimer.css'; 
 
@@ -34,10 +35,31 @@ const TextTimer = ({ secondsRemaining, onComplete, onBackToSetTimer, isMenuOpen,
     onBackToSetTimer();
   };
 
+  // Definiera animationsvarianter för knappen
+  const buttonVariants = {
+    initial: { scale: 1 },
+    animate: {
+      scale: [1, 1.1, 1], // Pulserande effekt
+      transition: {
+        duration: 1,
+        repeat: Infinity, // Oändlig upprepning
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
     <div className="text-timer">
       <h2 className="time-display">{formatTextTime(secondsRemaining)}</h2>
-      <button className="text-button" onClick={handleAbort}>Abort Timer</button>
+      <motion.button 
+        className="text-button" 
+        onClick={handleAbort}
+        variants={buttonVariants} // Använd animationsvarianter
+        initial="initial" 
+        animate="animate" // Starta med animationen
+      >
+        Abort Timer
+      </motion.button>
       <Menu 
         onViewChange={onViewChange} 
         isMenuOpen={isMenuOpen} 

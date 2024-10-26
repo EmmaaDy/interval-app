@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion'; // Importera motion
 import Menu from '../../components/Menu/Menu';
 import './AnalogTimer.css';
 
@@ -30,6 +31,19 @@ const AnalogTimer = ({ secondsRemaining, onComplete, onBackToSetTimer, isMenuOpe
     onBackToSetTimer();
   };
 
+  // Definiera animationsvarianter för knappen
+  const buttonVariants = {
+    initial: { scale: 1 },
+    animate: {
+      scale: [1, 1.1, 1], // Pulserande effekt
+      transition: {
+        duration: 1,
+        repeat: Infinity, // Oändlig upprepning
+        ease: "easeInOut",
+      },
+    },
+  };
+
   const ticks = Array.from({ length: 60 }, (_, index) => (
     <div
       key={index}
@@ -46,7 +60,15 @@ const AnalogTimer = ({ secondsRemaining, onComplete, onBackToSetTimer, isMenuOpe
         <div className="hand minute-hand" ref={minuteHandRef}></div> {/* Minutvisare */}
         <div className="hand second-hand" ref={secondHandRef}></div> {/* Sekundvisare */}
       </div>
-      <button className="analog-button" onClick={handleAbort}>Abort Timer</button>
+      <motion.button 
+        className="analog-button" 
+        onClick={handleAbort}
+        variants={buttonVariants} // Använd animationsvarianter
+        initial="initial" 
+        animate="animate" // Starta med animationen
+      >
+        Abort Timer
+      </motion.button>
       {/* Skicka onViewChange till menyn */}
       <Menu 
         onViewChange={onViewChange} 

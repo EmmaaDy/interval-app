@@ -2,8 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
-  position: relative;
+  margin-top: 80px; /* Bevara detta värde om det behövs */
 }
 
 .time-display {
@@ -12,24 +11,18 @@
   text-align: center;
 }
 
-
-
 .text-button {
   background-color: #ffffff; 
   color: rgb(0, 0, 0); 
   border: 2px solid rgb(109, 109, 109); 
-  border-radius: 5px;
-  padding: 8px 15px;
-  font-size: 15px;
+  border-radius: 5px; 
+  padding: 8px 15px; 
+  font-size: 15px; 
   cursor: pointer; 
   transition: background-color 0.3s; 
   outline: none; 
-  
-  position: absolute;
-  bottom: -260px;
-  left: 50%;
-  transform: translateX(-50%);
-  
+
+  margin-top: 60%; /* Öka avståndet för knappen */
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 
