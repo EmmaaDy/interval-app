@@ -30,6 +30,10 @@ Appen kan nås här: [Interval App](http://interval-app-timer.s3-website.eu-nort
 ➡️ **Öppna projektmappen i din terminal.**
 
 ➡️ **Installera nödvändiga beroenden genom att köra följande kommando:**
+```
+npm install
+
+```
 
 ➡️ **Öppna din webbläsare och navigera till [Interval App](http://interval-app-timer.s3-website.eu-north-1.amazonaws.com/) för att använda applikationen.**
 
