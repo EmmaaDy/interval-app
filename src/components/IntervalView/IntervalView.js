@@ -8,6 +8,19 @@ const IntervalView = ({ onContinue, onAbort, isBreak, secondsRemaining }) => {
   const minutes = Math.floor(secondsRemaining / 60);
   const seconds = secondsRemaining % 60;
 
+  // Define animations for the button
+  const buttonVariants = {
+    initial: { scale: 1 },
+    animate: {
+      scale: [1, 1.05, 1], // Pulsating effect
+      transition: {
+        duration: 1,
+        repeat: Infinity, // Repeat indefinitely
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
     <div className="interval-view">
       <div className="interval-content">
@@ -15,8 +28,8 @@ const IntervalView = ({ onContinue, onAbort, isBreak, secondsRemaining }) => {
           <div>
             <motion.div
               className="pause-icon"
-              animate={{ rotate: [0, 5, -5, 0] }} // Definiera skakningsanimation
-              transition={{ duration: 0.5, repeat: Infinity }} // Animationens längd och upprepning
+              animate={{ rotate: [0, 5, -5, 0] }} // Define shaking animation
+              transition={{ duration: 0.5, repeat: Infinity }} // Animation duration and repetition
             >
               <FaPause style={{ fontSize: '80px', color: 'white', marginBottom: '20px' }} />
             </motion.div>
@@ -24,12 +37,28 @@ const IntervalView = ({ onContinue, onAbort, isBreak, secondsRemaining }) => {
             <div className="countdown">
               <h2>{minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h2>
             </div>
-            <button className="common-button" onClick={onContinue}>No pause, go now!</button>
+            <motion.button 
+              className="common-button" 
+              onClick={onContinue}
+              variants={buttonVariants} // Use defined animation variants
+              initial="initial" // Start with initial variant
+              animate="animate" // Animate to defined variant
+            >
+              No pause, go now!
+            </motion.button>
           </div>
         ) : (
           <div>
             <h2 className="alarm-text">No pause, go now!</h2>
-            <button className="common-button" onClick={onContinue}>Continue</button>
+            <motion.button 
+              className="common-button" 
+              onClick={onContinue}
+              variants={buttonVariants} // Use defined animation variants
+              initial="initial" // Start with initial variant
+              animate="animate" // Animate to defined variant
+            >
+              Continue
+            </motion.button>
           </div>
         )}
       </div>
